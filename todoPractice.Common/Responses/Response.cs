@@ -1,6 +1,6 @@
 ﻿namespace todoPractice.Common.Responses
 {
-    internal class Response
+    public class Response
     {
         public bool IsSuccess { get; set; }
 

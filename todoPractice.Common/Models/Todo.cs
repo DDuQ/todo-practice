@@ -2,7 +2,7 @@
 
 namespace todoPractice.Common.Models
 {
-    internal class Todo
+    public class Todo
     {
         public DateTime CreatedTime { get; set; }
 
