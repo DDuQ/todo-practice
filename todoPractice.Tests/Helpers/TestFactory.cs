@@ -27,6 +27,12 @@ namespace todoPractice.Tests.Helpers
             };
         }
 
+        /// <summary>
+        /// Method used to update a Todo.
+        /// </summary>
+        /// <param name="todoId"></param>
+        /// <param name="todoRequest"></param>
+        /// <returns></returns>
         public static DefaultHttpRequest CreateHttpRequest(Guid todoId, Todo todoRequest)
         {
             string request = JsonConvert.SerializeObject(todoRequest);
@@ -37,6 +43,11 @@ namespace todoPractice.Tests.Helpers
             };
         }
 
+        /// <summary>
+        /// Method can be used as a Delete or GetById call.
+        /// </summary>
+        /// <param name="todoId"></param>
+        /// <returns></returns>
         public static DefaultHttpRequest CreateHttpRequest(Guid todoId)
         {
             return new DefaultHttpRequest(new DefaultHttpContext())
@@ -45,6 +56,11 @@ namespace todoPractice.Tests.Helpers
             };
         }
 
+        /// <summary>
+        /// Method used to create a Todo.
+        /// </summary>
+        /// <param name="todoRequest"></param>
+        /// <returns></returns>
         public static DefaultHttpRequest CreateHttpRequest(Todo todoRequest)
         {
             string request = JsonConvert.SerializeObject(todoRequest);
@@ -54,6 +70,10 @@ namespace todoPractice.Tests.Helpers
             };
         }
 
+        /// <summary>
+        /// Method used to mock a GetAllTodos request.
+        /// </summary>
+        /// <returns></returns>
         public static DefaultHttpRequest CreateHttpRequest()
         {
             return new DefaultHttpRequest(new DefaultHttpContext());
