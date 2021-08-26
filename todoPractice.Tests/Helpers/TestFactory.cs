@@ -4,9 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using todoPractice.Common.Models;
 using todoPractice.Functions.Entities;
 
@@ -71,7 +69,7 @@ namespace todoPractice.Tests.Helpers
         }
 
         /// <summary>
-        /// Method used to mock a GetAllTodos request.
+        /// Method used to mock GetAllTodos request.
         /// </summary>
         /// <returns></returns>
         public static DefaultHttpRequest CreateHttpRequest()
@@ -102,7 +100,7 @@ namespace todoPractice.Tests.Helpers
         public static ILogger CreateLogger(LoggerTypes type = LoggerTypes.Null)
         {
             ILogger logger;
-            if(type == LoggerTypes.List)
+            if (type == LoggerTypes.List)
             {
                 logger = new ListLogger();
             }
