@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using todoPractice.Common.Models;
+using todoPractice.Functions.Entities;
 using todoPractice.Functions.Functions;
 using todoPractice.Tests.Helpers;
 using Xunit;
@@ -49,19 +50,52 @@ namespace todoPractice.Tests.Tests
 
         }
 
-        //[Fact]
-        //public async void GetAllTodos_Should_Return_200()
-        //{
-        //    //Arrange
-        //    MockCloudTableTodos mockTodos = new MockCloudTableTodos(new Uri("http://127.0.0.1:10002/devstoreaccount1/reports"));
-        //    DefaultHttpRequest request = TestFactory.CreateHttpRequest();
+        [Fact]
+        public void GetTodoById_Should_Return_200()
+        {
+            //Arrange
+            TodoEntity todoEntityRequest = TestFactory.GetTodoEntity();
+            Guid todoId = Guid.NewGuid();
+            DefaultHttpRequest request = TestFactory.CreateHttpRequest(todoId);
 
-        //    //Act
-        //    IActionResult response = await TodoApi.GetAllTodos(request, mockTodos, logger);
+            //Act
+            IActionResult response = TodoApi.GetTodoById(request, todoEntityRequest, todoId.ToString(), logger);
 
-        //    //Assert
-        //    OkObjectResult result = (OkObjectResult)response;
-        //    Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
-        //}
+            //Assert
+            OkObjectResult result = (OkObjectResult)response;
+            Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+        }
+
+        [Fact]
+        public async void DeleteTodo_Should_Return_200()
+        {
+            //Arrange
+            MockCloudTableTodos mockTodos = new MockCloudTableTodos(new Uri("http://127.0.0.1:10002/devstoreaccount1/reports"));
+            TodoEntity todoEntityRequest = TestFactory.GetTodoEntity();
+            Guid todoId = Guid.NewGuid();
+            DefaultHttpRequest request = TestFactory.CreateHttpRequest(todoId);
+
+            //Act
+            IActionResult response = await TodoApi.DeleteTodo(request, todoEntityRequest, mockTodos, todoId.ToString(), logger);
+
+            //Assert
+            OkObjectResult result = (OkObjectResult)response;
+            Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+        }
+
+        [Fact]
+        public async void GetAllTodos_Should_Return_200()
+        {
+            //Arrange
+            MockCloudTableTodos mockTodos = new MockCloudTableTodos(new Uri("http://127.0.0.1:10002/devstoreaccount1/reports"));
+            DefaultHttpRequest request = TestFactory.CreateHttpRequest();
+
+            //Act
+            IActionResult response = await TodoApi.GetAllTodos(request, mockTodos, logger);
+
+            //Assert
+            OkObjectResult result = (OkObjectResult)response;
+            Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+        }
     }
 }
